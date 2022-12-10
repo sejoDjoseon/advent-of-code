@@ -53,18 +53,18 @@ function updateTailPosition(HPos: Position, TPos: Position): Position {
     if (Math.abs(horizontalDis) > Math.abs(verticalDis)) {
         if (horizontalDis > 0) {
             // goes right
-            newTPos = incrementPosition(positionH, Direction.Left)
+            newTPos = incrementPosition(HPos, Direction.Left)
         } else  {
             // goes left
-            newTPos = incrementPosition(positionH, Direction.Right)
+            newTPos = incrementPosition(HPos, Direction.Right)
         }
     } else {
         if (verticalDis > 0) {
             // goes down
-            newTPos = incrementPosition(positionH, Direction.Up)
+            newTPos = incrementPosition(HPos, Direction.Up)
         } else  {
             // goes up
-            newTPos = incrementPosition(positionH, Direction.Down)
+            newTPos = incrementPosition(HPos, Direction.Down)
         }
     }
 
