@@ -15,8 +15,6 @@ packetLines.forEach(packetLine => {
     packets.push({first, second})
 });
 
-const rightOrderPackets: number[] = []
-
 function compareNumbers(n1: number, n2: number): boolean | undefined {
     if (n1 < n2) {
         return true
@@ -65,16 +63,32 @@ function compare(first: any[], second: any[]): boolean | undefined {
     return false
 }
 
-packets.forEach((packet, index) => {
+const allLines: any[] = []
+
+packets.forEach(packet => {
     const {first, second} = packet
-    const result = compare(first, second)
-    if (result || result === undefined) {
-        rightOrderPackets.push(index + 1)
+    allLines.push(first, second)
+})
+
+allLines.push([[2]], [[6]])
+
+allLines.sort((first, second) => {
+    const comp = compare(
+        JSON.parse(JSON.stringify(first)), 
+        JSON.parse(JSON.stringify(second))
+    )
+    if (comp === undefined) {
+        return 0
+    } else if (!comp) {
+        return 1
+    } else {
+        return -1
     }
-});
+})
 
-const indexesSum = rightOrderPackets.reduce(
-    (prevValue, currValue) => prevValue + currValue, 0
-)
+let dividerIndex1, dividerIndex2 = 0
 
-console.log({ indexesSum })
+dividerIndex1 = allLines.findIndex((a) => JSON.stringify(a) === '[[2]]') +1
+dividerIndex2 = allLines.findIndex((a) => JSON.stringify(a) === '[[6]]') +1
+
+console.log(dividerIndex1 * dividerIndex2)
